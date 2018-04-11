@@ -94,6 +94,9 @@ public class AllureCucumber2Jvm implements Formatter {
     }
 
     private void handleTestCaseStarted(final TestCaseStarted event) {
+        String browserName = System.getProperty("browser");
+        browserName = browserName == null ? "" : browserName.toUpperCase() + " : ";
+
         currentFeatureFile = event.testCase.getUri();
         currentFeature = cucumberSourceUtils.getFeature(currentFeatureFile);
 
@@ -107,7 +110,7 @@ public class AllureCucumber2Jvm implements Formatter {
         final TestResult result = new TestResult()
                 .withUuid(getTestCaseUuid(event.testCase))
                 .withHistoryId(getHistoryId(event.testCase))
-                .withName(event.testCase.getName())
+                .withName(browserName + event.testCase.getName())
                 .withLabels(labelBuilder.getScenarioLabels())
                 .withLinks(labelBuilder.getScenarioLinks());
 
