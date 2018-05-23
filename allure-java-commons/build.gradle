@@ -4,6 +4,7 @@ apply from: "${gradleScriptDir}/maven-publish.gradle"
 apply from: "${gradleScriptDir}/bintray.gradle"
 apply plugin: 'maven'
 apply plugin: 'java'
+apply plugin: 'maven-publish'
 
 configurations {
     agent
@@ -28,4 +29,12 @@ dependencies {
 
 test.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }

@@ -3,6 +3,7 @@ description = 'Allure TestNG'
 apply from: "${gradleScriptDir}/maven-publish.gradle"
 apply from: "${gradleScriptDir}/bintray.gradle"
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 configurations {
     agent
@@ -53,4 +54,12 @@ configurations {
 artifacts {
     spiOff spiOffJar
     archives spiOffJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }

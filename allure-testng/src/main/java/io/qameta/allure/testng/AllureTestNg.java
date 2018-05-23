@@ -189,6 +189,9 @@ public class AllureTestNg implements ISuiteListener, ITestListener, IInvokedMeth
     @Override
     @SuppressWarnings({"Indentation", "PMD.ExcessiveMethodLength"})
     public void onTestStart(final ITestResult testResult) {
+        String browserName = System.getProperty("browser");
+        browserName = browserName == null ? "" : browserName.toUpperCase() + " : ";
+
         Current current = currentTestResult.get();
         if (current.isStarted()) {
             current = refreshContext();
@@ -217,8 +220,8 @@ public class AllureTestNg implements ISuiteListener, ITestListener, IInvokedMeth
         final List<Parameter> parameters = getParameters(testResult);
         final TestResult result = new TestResult()
                 .withUuid(current.getUuid())
-                .withHistoryId(getHistoryId(method, parameters))
-                .withName(getMethodName(method))
+                .withHistoryId(browserName + getHistoryId(method, parameters))
+                .withName(browserName + getMethodName(method))
                 .withFullName(getQualifiedName(method))
                 .withStatusDetails(new StatusDetails()
                         .withFlaky(isFlaky(testResult))

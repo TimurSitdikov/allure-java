@@ -3,6 +3,7 @@ description = 'Allure Descriptions Javadoc'
 apply from: "${gradleScriptDir}/maven-publish.gradle"
 apply from: "${gradleScriptDir}/bintray.gradle"
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 dependencies {
     compile project(':allure-java-commons')
@@ -10,4 +11,12 @@ dependencies {
 
     testCompile 'org.testng:testng'
     testCompile 'com.google.testing.compile:compile-testing:0.10'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }

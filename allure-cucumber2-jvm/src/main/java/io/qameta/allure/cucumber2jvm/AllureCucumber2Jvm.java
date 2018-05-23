@@ -109,7 +109,7 @@ public class AllureCucumber2Jvm implements Formatter {
 
         final TestResult result = new TestResult()
                 .withUuid(getTestCaseUuid(event.testCase))
-                .withHistoryId(getHistoryId(event.testCase))
+                .withHistoryId(browserName + getHistoryId(event.testCase))
                 .withName(browserName + event.testCase.getName())
                 .withLabels(labelBuilder.getScenarioLabels())
                 .withLinks(labelBuilder.getScenarioLinks());
